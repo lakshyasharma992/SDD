@@ -1,42 +1,19 @@
 package com.sdd.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Product {
-	
-	 private String name;
-     private double price;
-     private boolean isGroceryItem;
-     
-     public Product(String name, double price, boolean isGroceryItem) {
-         this.name = name;
-         this.price = price;
-         this.isGroceryItem = isGroceryItem;
-     }
-     
-     public double getPrice() {
-         return price;
-     }
-     
-     public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
+	private String name;
+	private double price;
+	private boolean isGroceryItem;
+
+	public Product(String name, double price, boolean isGroceryItem) {
 		this.name = name;
-	}
-
-	public boolean isGroceryItem() {
-		return isGroceryItem;
-	}
-
-	public void setGroceryItem(boolean isGroceryItem) {
+		this.price = price;
 		this.isGroceryItem = isGroceryItem;
 	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public boolean isGrocery() {
-         return isGroceryItem;
-     }
 }
