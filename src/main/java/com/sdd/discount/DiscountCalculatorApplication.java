@@ -1,13 +1,13 @@
 package com.sdd.discount;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.sdd.entity.Product;
-import java.util.Arrays;
+import com.sdd.exception.ProductNotFoundException;
 
 @SpringBootApplication
 public class DiscountCalculatorApplication {
@@ -27,10 +27,20 @@ public class DiscountCalculatorApplication {
 		System.out.println("Bill for customer " + customerBill);
 
 		double affiliateBill = discountCalculate("Affiliate", 1, employeeProducts);
-		System.out.println("Bill for customer " + affiliateBill);
+		System.out.println("Bill for Affiliate " + affiliateBill);
+
+		/*
+		 * Empty cart
+		 */
+
+		double emptyCartBill = discountCalculate("Affiliate", 1, null);
+		System.out.println("Bill for Affiliate " + affiliateBill);
 	}
 
 	static double discountCalculate(String user, int years, List<Product> products) {
+		if (products == null || products.isEmpty()) {
+			throw new ProductNotFoundException("## Cart is Empty ## ");
+		}
 
 		double totalPrice = products.stream().collect(Collectors.summingDouble(Product::getPrice));
 		double isGroceryItemPrice = products.stream().filter(p -> p.isGrocery())
